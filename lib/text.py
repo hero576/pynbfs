@@ -386,8 +386,8 @@ class DatetimeTextRecord(Text):
     def parse(cls, fp):
         data = struct.unpack('<Q', fp.read(8))[0]
         tz = data & 3
-        value = data >> 2
-
+        # value = data >> 2
+        value = data
         return DatetimeTextRecord(value, tz)
 
 
@@ -403,14 +403,16 @@ class Chars8TextRecord(Text):
     def to_bytes(self):
         data = self.value.encode('utf-8')
         bytes  = struct.pack('<B', self.type)
-        bytes += struct.pack('<B', len(data))
+        bytes += MultiByteInt31(len(data)).to_bytes()
+        # bytes += struct.pack('<B', len(data))
         bytes += data
 
         return bytes
 
     @classmethod
     def parse(cls, fp):
-        ln = struct.unpack('<B', fp.read(1))[0]
+        # ln = struct.unpack('<B', fp.read(1))[0]
+        ln = MultiByteInt31.parse(fp).value
         value = fp.read(ln).decode('utf-8')
         return cls(value)
 

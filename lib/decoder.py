@@ -26,7 +26,7 @@ class Decoder:
         self.index = 0
         start_envelope = data.find(b'\x56\x02\x0B')
         fp = BytesIO(data)
-        if start_envelope:
+        if start_envelope>0:
             # In that case, should follow [MC-NBFSE] specs, i.e. uses StringTable (in-band dictionary)
             # In that case, packets are built as follow:
             # [size of in-band elements (7bit-int)][in-band elements][56 02 0B .... .NET Binary content]

@@ -86,7 +86,7 @@ def dump_records(records):
     :returns: a bytestring
     :rtype: str
     """
-    out = ''
+    out = b''
     # print(records)
     for r in records:
         msg = 'Write %s' % type(r).__name__

@@ -1,5 +1,5 @@
 import time
-from html.parser import HTMLParser
+from lib.html_parser import HTMLParser
 import re
 import base64
 import logging
