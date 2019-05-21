@@ -72,11 +72,11 @@ class Decoder:
         except Exception as e:
             raise Exception(traceback.format_exc())
 
-    def xml_to_mcnbfse(self, content, nosizeprefix):
+    def xml_to_mcnbfse(self, content, nosizeprefix=True):
         """
         Encode XML into .NET Binary in format [MC-NBFSE]
         """
-
+        self.input = content
         # Extract in-band dictionary from xml and produce binary
         inband_dictionary = self.extract_inband_dictionary_from_xml()
         binary_inband = self.inband_dictionary_to_binary_format(inband_dictionary, nosizeprefix)
@@ -175,8 +175,7 @@ class Decoder:
 
         binary = bytearray(length)
         i = 0
-        list_index = inband_dictionary.keys()
-        list_index.sort()
+        list_index = sorted(inband_dictionary)
         for index in list_index:
             binary[i] = len(inband_dictionary[index])
             i += 1

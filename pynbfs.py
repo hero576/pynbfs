@@ -29,7 +29,7 @@ class NBFS:
         '''
         return parse.xml_to_mcnbfs(content)
 
-    def xml2mcnbfse(self, content,nosizeprefix):
+    def xml2mcnbfse(self, content,nosizeprefix=True):
         '''
         XML to .NET Binary in format [MC-NBFSE] with in-band dictionary
         :param content:
